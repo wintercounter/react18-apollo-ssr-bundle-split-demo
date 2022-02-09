@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+    client:
+        container_name: client
+        image: wintercounter/mhy
+        working_dir: /app
+        restart: unless-stopped
+        command: bash -c "npm run dev:client"
+        volumes:
+            - ./:/app
+        depends_on:
+            - server
+
+    server:
+        container_name: server
+        image: wintercounter/mhy
+        working_dir: /app
+        restart: unless-stopped
+        environment:
+            - PORT=8080
+            - PRIVATE_API_HOST=strapi
+            - STRAPI_HOST=strapi
+            - STRAPI_PORT=1337
+            - PUBLIC_API_HOST=http://localhost:17111
+            - THUMBOR_STATIC_HOST=http://localhost:17113
+            - RUST_STATIC_HOST=http://localhost:17116
+        command: bash -c "npm run dev:server"
+        ports:
+            - 17112:8080
+        volumes:
+            - ./:/app

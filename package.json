@@ -1,0 +1,52 @@
+{
+  "name": "react18-apollo-ssr-bundle-split-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "config": "mhy config typescript eslint prettier -io",
+    "server": "npx cross-env PORT=8080 mhy node src/server",
+    "dev:server": "nodemon -w src -e ts,tsx,js,html --exec \"npm run server\"",
+    "dev:client": "mhy wp --watch",
+    "prod:server": "npm run server",
+    "prod:client": "npm run config && mhy wp --mhy-env=prod"
+  },
+  "mhy": {
+    "mhy": {
+      "root": {
+        "defaultAliases": {
+          "react": "react-18",
+          "react-dom": "react-dom-18"
+        }
+      }
+    },
+    "webpack": {
+      "root": {
+        "output": {
+          "publicPath": "/static/"
+        }
+      }
+    },
+    "swc": {
+      "root": {
+        "exclude": [
+          "node_modules"
+        ]
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wintercounter/react18-apollo-ssr-bundle-split-demo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wintercounter/react18-apollo-ssr-bundle-split-demo/issues"
+  },
+  "homepage": "https://github.com/wintercounter/react18-apollo-ssr-bundle-split-demo#readme",
+  "dependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
